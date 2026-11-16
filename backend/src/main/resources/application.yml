@@ -22,7 +22,8 @@ spring:
           api-key: ${GEMINI_API_KEY:dummy-key-for-local-boot}
           text:
             options:
-              model: text-embedding-004
+              model: gemini-embedding-001
+              dimensions: 768
     vectorstore:
       pgvector:
         initialize-schema: true

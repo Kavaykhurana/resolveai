@@ -250,8 +250,8 @@ export default function Chat() {
           )}
           {timeline.map((item, i) =>
             item.kind === 'message'
-              ? <Bubble key={item.data.id ?? `m-${i}`} sender={item.data.sender} content={item.data.content} />
-              : <ActionCard key={item.data.id ?? `a-${i}`} action={item.data} />
+              ? <Bubble key={`m-${item.data.id ?? i}`} sender={item.data.sender} content={item.data.content} />
+              : <ActionCard key={`a-${item.data.id ?? i}`} action={item.data} />
           )}
           {liveActions.map((a) => <ActionCard key={`live-${a.id}`} action={a} />)}
           {busy && (

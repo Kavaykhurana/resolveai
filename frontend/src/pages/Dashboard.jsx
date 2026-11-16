@@ -212,9 +212,9 @@ export default function Dashboard() {
               <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
                 {timeline.map((item, i) =>
                   item.kind === 'action' ? (
-                    <ActionCard key={item.data.id ?? `a-${i}`} action={item.data} />
+                    <ActionCard key={`a-${item.data.id ?? i}`} action={item.data} />
                   ) : (
-                    <div key={item.data.id ?? `m-${i}`} className={`max-w-2xl rounded-xl border px-4 py-2 text-sm ${
+                    <div key={`m-${item.data.id ?? i}`} className={`max-w-2xl rounded-xl border px-4 py-2 text-sm ${
                       item.data.sender === 'USER'
                         ? 'border-slate-200 bg-white'
                         : item.data.sender === 'HUMAN_AGENT'
