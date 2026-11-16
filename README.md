@@ -68,7 +68,7 @@ Built for the Unstop **AI Builder Hackathon** and **Gen-AI Product Hackathon**.
 | **Agentic AI** | The agent reasons per message, chooses tools, executes multi-step resolutions and reports outcomes — visible as action cards |
 | **LLMs** | Gemini 2.5 Flash via Spring AI `ChatClient` |
 | **Function calling / tool integration** | 4 `@Tool` methods (`checkOrderStatus`, `createTicket`, `recommendRefund`, `escalateToHuman`) with per-request `ToolContext` scoping |
-| **RAG** | 6 policy documents chunked, embedded (`text-embedding-004`) into pgvector; top-4 similarity retrieval injected into the system prompt with source names |
+| **RAG** | 6 policy documents chunked, embedded (`gemini-embedding-001`) into pgvector; top-4 similarity retrieval injected into the system prompt with source names |
 | **Semantic search** | Cosine-distance HNSW index over 768-dim embeddings |
 | **Human-in-the-loop** | Refund recommendations are PENDING until a human decides; escalations hand the conversation to a human agent |
 
@@ -98,7 +98,7 @@ Built for the Unstop **AI Builder Hackathon** and **Gen-AI Product Hackathon**.
                               └───────────────────────────────────┘
                                          ▲
                               Gemini API │ chat: gemini-2.5-flash
-                              (Google)   │ embeddings: text-embedding-004
+                              (Google)   │ embeddings: gemini-embedding-001
 ```
 
 **Agent flow per message:** persist user message → embed query & retrieve top-4 policy chunks → build system prompt (persona + rules + grounded context) + last-20-message history → stream Gemini response with tool callbacks → tools execute against the DB and emit SSE `action` events → persist AI answer → `done` event.
@@ -111,7 +111,7 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full design (data model
 |---|---|
 | Frontend | React 19, Tailwind CSS 4, Vite 7, react-router-dom 7 |
 | Backend | Java 21, Spring Boot 3.5, Spring Web MVC, Spring Security, Spring Data JPA / Hibernate |
-| AI | Spring AI 1.1 — Google GenAI (Gemini 2.5 Flash chat, text-embedding-004 embeddings), PgVector store |
+| AI | Spring AI 1.1 — Google GenAI (Gemini 2.5 Flash chat, gemini-embedding-001 embeddings), PgVector store |
 | Database | PostgreSQL 16+ with pgvector, Flyway migrations |
 | Auth | JWT (jjwt 0.12), BCrypt |
 | Build | Maven (backend), npm/Vite (frontend) |

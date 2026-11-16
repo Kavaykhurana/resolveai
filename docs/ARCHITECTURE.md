@@ -34,7 +34,7 @@ PostgreSQL + pgvector ── Render
 
 - Single Spring Boot service (modular packages, not microservices).
 - Chat responses stream via SSE: token events + `agent_action` events. Every tool call is persisted (`agent_actions`) and rendered as an action card in the UI — the visible audit trail of autonomous behavior.
-- Document ingestion at startup: seeded markdown docs under `backend/src/main/resources/kb/` are chunked (TokenTextSplitter), embedded with Gemini `text-embedding-004`, stored in pgvector. Idempotent: skipped when the vector store already contains the document set (tracked via a `kb_ingestion` marker row).
+- Document ingestion at startup: seeded markdown docs under `backend/src/main/resources/kb/` are chunked (TokenTextSplitter), embedded with Gemini `gemini-embedding-001`, stored in pgvector. Idempotent: skipped when the vector store already contains the document set (tracked via a `kb_ingestion` marker row).
 - Conversation memory: full message history loaded from DB per turn and passed to ChatClient (no in-memory state; survives restarts).
 
 ## 3. Tech Stack (fixed by project brief)
@@ -45,7 +45,7 @@ PostgreSQL + pgvector ── Render
 | Backend | Java 21 + Spring Boot 3.5.x |
 | AI integration / agent | Spring AI 1.1.x (`spring-ai-starter-model-google-genai`) |
 | LLM | Gemini (`gemini-2.5-flash`) via Gemini Developer API key |
-| Embeddings | Gemini `text-embedding-004` (768 dims) |
+| Embeddings | Gemini `gemini-embedding-001` (768 dims) |
 | RAG / vector DB | Spring AI PgVectorStore + PostgreSQL pgvector |
 | ORM | Spring Data JPA + Hibernate |
 | Migrations | Flyway |
