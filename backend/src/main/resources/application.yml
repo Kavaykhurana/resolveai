@@ -2,7 +2,7 @@ spring:
   application:
     name: resolveai
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/resolveai}
+    url: ${DB_URL:jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:resolveai}}
     username: ${DB_USER:kavaykhurana}
     password: ${DB_PASSWORD:}
   jpa:

@@ -38,6 +38,8 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
+                // SSE completion triggers an ASYNC re-dispatch without the Authorization header
+                .dispatcherTypeMatchers(jakarta.servlet.DispatcherType.ASYNC).permitAll()
                 .requestMatchers("/api/auth/**", "/api/health", "/error").permitAll()
                 .requestMatchers("/api/agent/**").hasRole("AGENT")
                 .anyRequest().authenticated())
